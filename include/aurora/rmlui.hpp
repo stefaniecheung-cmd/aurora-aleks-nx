@@ -29,6 +29,8 @@ bool is_initialized() noexcept;
 void set_input_type(InputType type) noexcept;
 void set_ui_scale(float scale) noexcept;
 float get_ui_scale() noexcept;
+void set_translate_callback(
+    std::function<int(Rml::String&, const Rml::String&)> callback) noexcept;
 void set_glass_light_dir(float x, float y) noexcept;
 
 struct RuntimeTexture {
