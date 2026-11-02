@@ -403,6 +403,14 @@ void set_input_type(InputType type) noexcept {
   }
 }
 
+void set_translate_callback(
+    std::function<int(Rml::String&, const Rml::String&)> callback) noexcept {
+  auto* systemInterface = static_cast<SystemInterface_Aurora*>(Backend::GetSystemInterface());
+  if (systemInterface != nullptr) {
+    systemInterface->SetTranslateCallback(std::move(callback));
+  }
+}
+
 void handle_event(SDL_Event& event) noexcept {
   if (g_context == nullptr || imgui::wants_capture_event(event)) {
     return;
