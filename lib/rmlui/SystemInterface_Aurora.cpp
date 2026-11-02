@@ -125,4 +125,17 @@ bool SystemInterface_Aurora::LogMessage(Rml::Log::Type type, const Rml::String& 
     return true;
   }
 }
+
+int SystemInterface_Aurora::TranslateString(Rml::String& translated, const Rml::String& input) {
+  if (!mTranslateCallback) {
+    translated = input;
+    return 0;
+  }
+  return mTranslateCallback(translated, input);
+}
+
+void SystemInterface_Aurora::SetTranslateCallback(
+    std::function<int(Rml::String&, const Rml::String&)> callback) noexcept {
+  mTranslateCallback = std::move(callback);
+}
 } // namespace aurora::rmlui
